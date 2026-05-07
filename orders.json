@@ -1,0 +1,43 @@
+[
+    {
+        "user": {
+            "company": "長榮航空",
+            "empId": "EVA12345",
+            "name": "陳小明",
+            "phone": "0912-345-678"
+        },
+        "items": [
+            { "id": 3, "name": "限定版飛機模型 1:200", "price": 1800, "quantity": 1 },
+            { "id": 5, "name": "長榮航空 A350 模型", "price": 2200, "quantity": 1 }
+        ],
+        "total": 4000,
+        "timestamp": "2026-05-06T10:00:00.000Z"
+    },
+    {
+        "user": {
+            "company": "長榮航勤",
+            "empId": "GHA67890",
+            "name": "李曉華",
+            "phone": "0988-111-222"
+        },
+        "items": [
+            { "id": 2, "name": "經典保濕面霜套裝", "price": 3200, "quantity": 2 }
+        ],
+        "total": 6400,
+        "timestamp": "2026-05-06T12:30:15.000Z"
+    },
+    {
+        "user": {
+            "company": "長榮資訊",
+            "empId": "EIT55667",
+            "name": "王大同",
+            "phone": "0933-555-777"
+        },
+        "items": [
+            { "id": 1, "name": "品牌輕量抗噪耳機", "price": 8500, "quantity": 1 },
+            { "id": 6, "name": "多功能旅行插頭", "price": 600, "quantity": 1 }
+        ],
+        "total": 9100,
+        "timestamp": "2026-05-06T14:45:30.000Z"
+    }
+]

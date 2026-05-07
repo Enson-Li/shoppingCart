@@ -1,0 +1,8 @@
+[
+    { "id": 1, "name": "品牌輕量抗噪耳機", "price": 8500, "category": "電子電器", "imagePlaceholder": "Headphones", "image": "headphone.png", "description": "採用主動式降噪技術，提供長達 30 小時的續航力，讓您在飛行途中享受寧靜的音樂時光。" },
+    { "id": 2, "name": "經典保濕面霜套裝", "price": 3200, "category": "美妝護理", "imagePlaceholder": "Skincare", "image": "skincare.jpg", "description": "富含玻尿酸與天然植物精華，深度鎖水保濕，維持肌膚水嫩光澤，適合機艙乾燥環境。" },
+    { "id": 3, "name": "限定版飛機模型 1:200", "price": 1800, "category": "精品收藏", "imagePlaceholder": "Model", "image": "model.jpg", "description": "這是一款 1:200 精緻比例合金模型，採用限量特殊塗裝與高擬真細節。起落架可動，附專屬支架。" },
+    { "id": 4, "name": "高級絲絨眼罩", "price": 950, "category": "旅行用品", "imagePlaceholder": "Travel", "image": "travel.jpg", "description": "選用頂級親膚絲絨材質，觸感柔軟、極致遮光。符合人體工學設計，完美貼合眼部，為您打造高品質深度睡眠，優雅且舒適。" },
+    { "id": 5, "name": "長榮航空 A350 模型", "price": 2200, "category": "精品收藏", "imagePlaceholder": "A350", "image": "a350.jpg", "description": "完美重現經典綠色塗裝與流線機身。高品質合金打造，具備精緻起落架與專屬支架，航空迷絕不可錯過的夢幻珍藏！" },
+    { "id": 6, "name": "多功能旅行插頭", "price": 600, "category": "電子電器", "imagePlaceholder": "Adapter", "image": "adapter.jpg", "description": "內建多國插腳並支援多孔 USB 快充。體積輕巧好收納，具備過載保護功能，讓您一機在手，全球通用，旅程充電無憂。" }
+]
