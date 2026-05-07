@@ -1,130 +1,125 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hotel Shop - 商品管理後台</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-    <style>[v-cloak] { display: none; }</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hotel Shop - 商品管理後台</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <style>[v-cloak] { display: none; }</style>
 </head>
 <body class="bg-gray-100">
-    <div id="app" v-cloak class="p-8">
-        <div class="max-w-6xl mx-auto">
-            <div class="flex justify-between items-center mb-6">
-                <h1 class="text-2xl font-bold text-gray-800">商品資料維護</h1>
-                <button @click="openModal()" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 shadow transition">
-                    + 新增商品
-                </button>
-            </div>
-
-            <!-- 商品清單表格 -->
-            <div class="bg-white rounded-lg shadow overflow-hidden">
-                <table class="min-w-full divide-y divide-gray-200">
-                    <thead class="bg-gray-50">
-                        <tr>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">圖片</th>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">商品名稱</th>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">分類</th>
-                            <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase">價格</th>
-                            <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase">操作</th>
-                        </tr>
-                    </thead>
-                    <tbody class="divide-y divide-gray-200">
-                        <tr v-for="p in products" :key="p.id" class="hover:bg-gray-50 transition">
-                            <td class="px-6 py-4">
-                                <img :src="p.image.startsWith('http') || p.image.startsWith('data') ? p.image : './images/' + p.image" 
-                                     class="w-12 h-12 object-cover rounded shadow-sm">
-                            </td>
-                            <td class="px-6 py-4 font-medium text-gray-900">{{ p.name }}</td>
-                            <td class="px-6 py-4 text-gray-500">{{ p.category }}</td>
-                            <!-- 表格內容 (td)：加上 text-right -->
-                            <td class="px-6 py-4 text-emerald-600 font-bold text-right">TWD ${{ p.price.toLocaleString() }}</td>
-                            <td class="px-6 py-4 text-right space-x-2">
-                                <button @click="openModal(p)" class="text-blue-500 hover:text-blue-700">編輯</button>
-                                <button @click="deleteProduct(p.id)" class="text-red-500 hover:text-red-700">刪除</button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-<!-- 編輯/新增 彈出視窗 -->
-<div v-if="isModalOpen" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-    <!-- 修改 1：加上 flex flex-col 以及限制最大高度，並移除原本的 overflow-hidden -->
-    <div class="bg-white rounded-xl shadow-xl w-full max-w-md flex flex-col max-h-[90vh] overflow-hidden">
-        
+  <div id="app" v-cloak class="p-8">
+    <div class="max-w-6xl mx-auto">
+      <div class="flex justify-between items-center mb-6">
+        <h1 class="text-2xl font-bold text-gray-800">商品資料維護</h1>
+        <button @click="openModal()" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 shadow transition">
+          + 新增商品
+        </button>
+      </div>
+      
+      <!-- 商品清單表格 -->
+      <div class="bg-white rounded-lg shadow overflow-hidden">
+        <table class="min-w-full divide-y divide-gray-200">
+          <thead class="bg-gray-50">
+            <tr>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">圖片</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">商品名稱</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">分類</th>
+              <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase">價格</th>
+              <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase">操作</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-200">
+            <tr v-for="p in products" :key="p.id" class="hover:bg-gray-50 transition">
+              <td class="px-6 py-4">
+                <img :src="p.image.startsWith('http') || p.image.startsWith('data') ? p.image : './images/' + p.image" 
+                  class="w-12 h-12 object-cover rounded shadow-sm">
+              </td>
+              <td class="px-6 py-4 font-medium text-gray-900">{{ p.name }}</td>
+              <td class="px-6 py-4 text-gray-500">{{ p.category }}</td>
+              <!-- 表格內容 (td)：加上 text-right -->
+              <td class="px-6 py-4 text-emerald-600 font-bold text-right">TWD ${{ p.price.toLocaleString() }}</td>
+              <td class="px-6 py-4 text-right space-x-2">
+                <button @click="openModal(p)" class="text-blue-500 hover:text-blue-700">編輯</button>
+                <button @click="deleteProduct(p.id)" class="text-red-500 hover:text-red-700">刪除</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    
+    <!-- 編輯/新增 彈出視窗 -->
+    <div v-if="isModalOpen" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+      <!-- 修改 1：加上 flex flex-col 以及限制最大高度，並移除原本的 overflow-hidden -->
+      <div class="bg-white rounded-xl shadow-xl w-full max-w-md flex flex-col max-h-[90vh] overflow-hidden">
         <!-- 修改 2：標題區加上 flex-shrink-0 確保它不會被壓縮 -->
         <div class="p-4 border-b bg-gray-50 font-bold text-gray-700 flex-shrink-0">
-            {{ tempProduct.oldId !== null ? '修改商品' : '新增商品' }}
+          {{ tempProduct.oldId !== null ? '修改商品' : '新增商品' }}
         </div>
-
         <!-- 修改 3：內容區加上 overflow-y-auto 讓內容過長時出現捲軸 -->
         <div class="p-6 space-y-4 overflow-y-auto">
-            <!-- 商品編號 (ID) 編輯區 -->
+          <!-- 商品編號 (ID) 編輯區 -->
+          <div>
+            <label class="block text-sm font-medium text-gray-700">商品編號 (ID)</label>
+            <input 
+              v-model.number="tempProduct.id" 
+              type="number" 
+              :disabled="tempProduct.oldId !== null" 
+              :class="[
+                'mt-1 block w-full border rounded p-2 focus:ring-blue-500', 
+                tempProduct.oldId !== null ? 'bg-gray-200 cursor-not-allowed text-gray-500' : 'bg-white']" 
+              placeholder="請輸入唯一編號">
+            <p v-if="tempProduct.oldId !== null" class="text-xs text-blue-600 mt-1">修改模式下不開放編輯編號</p>
+            <p v-else class="text-xs text-gray-400 mt-1">請輸入唯一編號，儲存後不可更改</p>
+          </div>
+          
+          <div>
+            <label class="block text-sm font-medium text-gray-700">商品名稱</label>
+            <input v-model="tempProduct.name" type="text" class="mt-1 block w-full border rounded p-2 focus:ring-blue-500">
+          </div>
+          
+          <div class="mt-4">
+            <label class="block text-sm font-medium text-gray-700">商品說明</label>
+            <textarea 
+              v-model="tempProduct.description" 
+              rows="3" 
+              class="mt-1 block w-full border rounded p-2 focus:ring-blue-500" 
+              placeholder="請輸入商品詳細描述...">
+            </textarea>
+          </div>
+          
+          <div>
+            <label class="block text-sm font-medium text-gray-700">分類</label>
+            <select v-model="tempProduct.category" class="mt-1 block w-full border rounded p-2">
+              <option v-for="cat in categories" :key="cat" :value="cat">{{ cat }}</option>
+            </select>
+          </div>
+          
+          <div>
+            <label class="block text-sm font-medium text-gray-700">價格</label>
+              <input v-model.number="tempProduct.price" type="number" class="mt-1 block w-full border rounded p-2">
+            </div>
             <div>
-                <label class="block text-sm font-medium text-gray-700">商品編號 (ID)</label>
-                <input 
-                    v-model.number="tempProduct.id" 
-                    type="number" 
-                    :disabled="tempProduct.oldId !== null"
-                    :class="[
-                        'mt-1 block w-full border rounded p-2 focus:ring-blue-500',
-                        tempProduct.oldId !== null ? 'bg-gray-200 cursor-not-allowed text-gray-500' : 'bg-white'
-                    ]"
-                    placeholder="請輸入唯一編號"
-                >
-                <p v-if="tempProduct.oldId !== null" class="text-xs text-blue-600 mt-1">修改模式下不開放編輯編號</p>
-                <p v-else class="text-xs text-gray-400 mt-1">請輸入唯一編號，儲存後不可更改</p>
+              <label class="block text-sm font-medium text-gray-700">商品圖片</label>
+              <input type="file" @change="uploadImage" accept="image/*" class="mt-1 block w-full text-sm text-gray-500">
+              <div v-if="tempProduct.image" class="mt-2 relative w-24 h-24 border rounded overflow-hidden">
+                <img :src="tempProduct.image.startsWith('http') || tempProduct.image.startsWith('data') ? tempProduct.image : './images/' + tempProduct.image" 
+                  class="w-full h-full object-cover">
+              </div>
             </div>
-
-            <div>
-                <label class="block text-sm font-medium text-gray-700">商品名稱</label>
-                <input v-model="tempProduct.name" type="text" class="mt-1 block w-full border rounded p-2 focus:ring-blue-500">
-            </div>
-
-            <div class="mt-4">
-                <label class="block text-sm font-medium text-gray-700">商品說明</label>
-                <textarea 
-                    v-model="tempProduct.description" 
-                    rows="3" 
-                    class="mt-1 block w-full border rounded p-2 focus:ring-blue-500"
-                    placeholder="請輸入商品詳細描述..."
-                ></textarea>
-            </div>
-
-            <div>
-                <label class="block text-sm font-medium text-gray-700">分類</label>
-                <select v-model="tempProduct.category" class="mt-1 block w-full border rounded p-2">
-                    <option v-for="cat in categories" :key="cat" :value="cat">{{ cat }}</option>
-                </select>
-            </div>
-
-            <div>
-                <label class="block text-sm font-medium text-gray-700">價格</label>
-                <input v-model.number="tempProduct.price" type="number" class="mt-1 block w-full border rounded p-2">
-            </div>
-
-            <div>
-                <label class="block text-sm font-medium text-gray-700">商品圖片</label>
-                <input type="file" @change="uploadImage" accept="image/*" class="mt-1 block w-full text-sm text-gray-500">
-                <div v-if="tempProduct.image" class="mt-2 relative w-24 h-24 border rounded overflow-hidden">
-                    <img :src="tempProduct.image.startsWith('http') || tempProduct.image.startsWith('data') ? tempProduct.image : './images/' + tempProduct.image" 
-                         class="w-full h-full object-cover">
-                </div>
-            </div>
-        </div>
-
-        <!-- 修改 4：底部按鈕區加上 flex-shrink-0 確保它固定在底部 -->
-        <div class="p-4 border-t bg-gray-50 flex justify-end gap-2 flex-shrink-0">
+          </div>
+          
+          <!-- 修改 4：底部按鈕區加上 flex-shrink-0 確保它固定在底部 -->
+          <div class="p-4 border-t bg-gray-50 flex justify-end gap-2 flex-shrink-0">
             <button @click="isModalOpen = false" class="px-4 py-2 text-gray-600 hover:bg-gray-200 rounded">取消</button>
             <button @click="saveProduct" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">儲存</button>
         </div>
+      </div>
     </div>
-</div>
-    </div>
-
-    <script src="admin_main.js"></script>
+  </div>
+  
+  <script src="admin_main.js"></script>
 </body>
 </html>
