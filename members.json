@@ -1,0 +1,29 @@
+[
+  {
+    "id": "7d5b1e8a2c9d4f0b8e6a1c2d3e4f5a6b",
+    "email": "test@evergreen.com.tw",
+    "name": "管理員甲",
+    "company": "長榮國際",
+    "empId": "123456",
+    "phone": "0912345678",
+    "auth_token": "123456"
+  },
+  {
+    "id": "1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d",
+    "email": "john.doe@taipei-hotel.com",
+    "name": "陳小明",
+    "company": "長榮海運",
+    "empId": "666666",
+    "phone": "0922111222",
+    "auth_token": "token888"
+  },
+  {
+    "id": "f9e8d7c6b5a43210fedcba9876543210",
+    "email": "service@resort-spa.com",
+    "name": "林美玲",
+    "company": "長榮航空",
+    "empId": "111111",
+    "phone": "0933555777",
+    "auth_token": "spa999"
+  }
+]

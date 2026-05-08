@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hotel Shop - 後台管理系統</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen flex items-center justify-center">
+
+  <div class="max-w-4xl w-full px-6">
+    <header class="text-center mb-12">
+      <h1 class="text-4xl font-extrabold text-emerald-800 mb-2">後台管理中心</h1>
+      <p class="text-gray-600">請選擇您要執行的管理項目</p>
+    </header>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <!-- 交易清單卡片 -->
+      <a href="admin.html" class="group bg-white p-8 rounded-2xl shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border-b-4 border-emerald-500">
+        <div class="flex items-center justify-between mb-4">
+          <div class="p-3 bg-emerald-100 rounded-lg text-emerald-600 group-hover:bg-emerald-600 group-hover:text-white transition-colors">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+            </svg>
+          </div>
+          <span class="text-emerald-500 opacity-0 group-hover:opacity-100 transition-opacity font-bold">進入 →</span>
+        </div>
+        <h2 class="text-2xl font-bold text-gray-800 mb-2">交易清單管理</h2>
+        <p class="text-gray-500 text-sm">查看客戶訂單、處理進度及歷史交易明細。</p>
+      </a>
+
+      <!-- 商品維護卡片 -->
+      <a href="admin_products.html" class="group bg-white p-8 rounded-2xl shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border-b-4 border-blue-500">
+        <div class="flex items-center justify-between mb-4">
+          <div class="p-3 bg-blue-100 rounded-lg text-blue-600 group-hover:bg-blue-600 group-hover:text-white transition-colors">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+            </svg>
+          </div>
+          <span class="text-blue-500 opacity-0 group-hover:opacity-100 transition-opacity font-bold">進入 →</span>
+        </div>
+        <h2 class="text-2xl font-bold text-gray-800 mb-2">商品維護管理</h2>
+        <p class="text-gray-500 text-sm">新增、修改或刪除上架商品，管理庫存與價格。</p>
+      </a>
+      
+      <!-- Banner 維護卡片 -->
+      <a href="admin_banners.html" class="group bg-white p-8 rounded-2xl shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border-b-4 border-orange-500">
+        <div class="flex items-center justify-between mb-4">
+          <div class="p-3 bg-orange-100 rounded-lg text-orange-600 group-hover:bg-orange-600 group-hover:text-white transition-colors">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+            </svg>
+          </div>
+          <span class="text-orange-500 opacity-0 group-hover:opacity-100 transition-opacity font-bold">進入 →</span>
+        </div>
+        <h2 class="text-2xl font-bold text-gray-800 mb-2">Banner 維護管理</h2>
+        <p class="text-gray-500 text-sm">更換首頁輪播廣告、設定廣告標語以及關聯促銷商品。</p>
+      </a>
+      
+      <!-- 會員維護卡片 -->
+      <a href="admin_members.html" class="group bg-white p-8 rounded-2xl shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border-b-4 border-indigo-500">
+        <div class="flex items-center justify-between mb-4">
+          <div class="p-3 bg-indigo-100 rounded-lg text-indigo-600 group-hover:bg-indigo-600 group-hover:text-white transition-colors">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+            </svg>
+          </div>
+          <span class="text-indigo-500 opacity-0 group-hover:opacity-100 transition-opacity font-bold">進入 →</span>
+        </div>
+        <h2 class="text-2xl font-bold text-gray-800 mb-2">會員維護管理</h2>
+        <p class="text-gray-500 text-sm">管理會員帳號、公司資訊及登入權限，維護員工通訊錄。</p>
+      </a>
+    </div>
+    
+    <div class="mt-12 text-center">
+      <a href="index.html" class="text-gray-400 hover:text-emerald-700 transition text-sm">← 返回前台購物網站</a>
+    </div>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>會員維護管理 - 後台</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <style>[v-cloak] { display: none; }</style>
+</head>
+<body class="bg-gray-100">
+  <div id="app" v-cloak>
+    <!-- 導覽列 -->
+    <nav class="bg-gray-800 text-white shadow-md">
+      <div class="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center">
+        <div class="flex items-center gap-4">
+          <a href="index_admin.html" class="flex items-center gap-2 hover:text-emerald-400 transition">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+            </svg>
+            <span class="font-bold">管理後台首頁</span>
+          </a>
+          <span class="text-gray-500">/</span>
+          <span class="text-gray-300 text-sm">會員維護管理</span>
+        </div>
+        <div>
+          <a href="index.html" class="text-xs bg-gray-700 hover:bg-gray-600 px-3 py-1 rounded transition">前往前台</a>
+        </div>
+      </div>
+    </nav>
+
+    <main class="max-w-6xl mx-auto px-4 mt-12 pb-12">
+      <div class="flex justify-between items-center mb-6">
+        <h1 class="text-2xl font-bold text-gray-800">會員帳號管理</h1>
+        <button @click="openModal()" class="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition shadow-md">
+          + 新增會員
+        </button>
+      </div>
+
+      <!-- 會員清單表格 -->
+      <div class="bg-white rounded-xl shadow-sm overflow-hidden border border-gray-200">
+        <table class="min-w-full divide-y divide-gray-200">
+          <thead class="bg-gray-50">
+            <tr>
+              <th class="px-6 py-4 text-left text-xs font-bold text-gray-500 uppercase">姓名 / Email</th>
+              <th class="px-6 py-4 text-left text-xs font-bold text-gray-500 uppercase">公司 / 工號</th>
+              <th class="px-6 py-4 text-left text-xs font-bold text-gray-500 uppercase">聯絡電話</th>
+              <th class="px-6 py-4 text-right text-xs font-bold text-gray-500 uppercase">操作</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-200">
+            <tr v-for="m in members" :key="m.id" class="hover:bg-gray-50 transition">
+              <td class="px-6 py-4">
+                <div class="font-bold text-gray-900">{{ m.name }}</div>
+                <div class="text-sm text-gray-500">{{ m.email }}</div>
+              </td>
+              <td class="px-6 py-4">
+                <div class="text-sm text-gray-900">{{ m.company }}</div>
+                <div class="text-xs text-indigo-600 font-mono">{{ m.empId }}</div>
+              </td>
+              <td class="px-6 py-4 text-sm text-gray-600">{{ m.phone }}</td>
+              <td class="px-6 py-4 text-right space-x-3">
+                <button @click="openModal(m)" class="text-indigo-600 hover:text-indigo-900 font-medium">編輯</button>
+                <button @click="deleteMember(m.id)" class="text-red-500 hover:text-red-700 font-medium">刪除</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </main>
+
+    <!-- 編輯彈窗 -->
+    <div v-if="isModalOpen" class="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 z-50">
+      <div class="bg-white rounded-2xl w-full max-w-lg shadow-2xl overflow-hidden">
+        <div class="p-6 border-b bg-gray-50">
+          <h2 class="text-xl font-bold text-gray-700">{{ isEdit ? '編輯會員資料' : '新增會員帳號' }}</h2>
+          <p class="text-xs text-gray-400 mt-1 font-mono" v-if="tempMember.id">UID: {{ tempMember.id }}</p>
+        </div>
+        
+        <div class="p-6 grid grid-cols-2 gap-4">
+          <div class="col-span-2">
+            <label class="block text-sm font-bold text-gray-700 mb-1">Email (登入帳號)</label>
+            <input v-model="tempMember.email" type="email" class="w-full border rounded-lg p-2.5 outline-none focus:ring-2 focus:ring-indigo-500">
+          </div>
+          <div>
+            <label class="block text-sm font-bold text-gray-700 mb-1">真實姓名</label>
+            <input v-model="tempMember.name" type="text" class="w-full border rounded-lg p-2.5 outline-none focus:ring-2 focus:ring-indigo-500">
+          </div>
+          <div>
+            <label class="block text-sm font-bold text-gray-700 mb-1">聯絡電話</label>
+            <input v-model="tempMember.phone" type="text" class="w-full border rounded-lg p-2.5 outline-none focus:ring-2 focus:ring-indigo-500">
+          </div>
+          <div>
+            <label class="block text-sm font-bold text-gray-700 mb-1">公司名稱</label>
+            <input v-model="tempMember.company" type="text" class="w-full border rounded-lg p-2.5 outline-none focus:ring-2 focus:ring-indigo-500">
+          </div>
+          <div>
+            <label class="block text-sm font-bold text-gray-700 mb-1">人事代號 (EmpID)</label>
+            <input v-model="tempMember.empId" type="text" class="w-full border rounded-lg p-2.5 outline-none focus:ring-2 focus:ring-indigo-500">
+          </div>
+          <div class="col-span-2">
+            <label class="block text-sm font-bold text-gray-700 mb-1">登入密碼 (Auth Token)</label>
+            <input v-model="tempMember.auth_token" type="password" class="w-full border rounded-lg p-2.5 outline-none focus:ring-2 focus:ring-indigo-500" placeholder="請設定登入密碼">
+          </div>
+        </div>
+
+        <div class="p-6 bg-gray-50 border-t flex gap-3">
+          <button @click="isModalOpen = false" class="flex-1 py-2.5 border border-gray-300 rounded-lg text-gray-600 hover:bg-gray-100 font-medium">取消</button>
+          <button @click="saveMember" class="flex-1 py-2.5 bg-indigo-600 text-white rounded-lg font-bold hover:bg-indigo-700 shadow-md transition">確認儲存</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const { createApp, ref, onMounted } = Vue;
+
+    createApp({
+      setup() {
+        const members = ref([]);
+        const isModalOpen = ref(false);
+        const isEdit = ref(false);
+        const tempMember = ref({});
+
+        // 產生 32 位亂碼 ID 的函數
+        const generateUID = () => {
+          return Array.from({length: 32}, () => Math.floor(Math.random() * 16).toString(16)).join('');
+        };
+
+        const fetchMembers = async () => {
+          try {
+            const res = await fetch('members.json');
+            members.value = await res.json();
+          } catch (e) {
+            console.log("尚無會員資料");
+            members.value = [];
+          }
+        };
+
+        const openModal = (item = null) => {
+          if (item) {
+            isEdit.value = true;
+            tempMember.value = { ...item };
+          } else {
+            isEdit.value = false;
+            tempMember.value = {
+              id: generateUID(), // 新增時自動產生 ID
+              email: '',
+              name: '',
+              company: '',
+              empId: '',
+              phone: '',
+              auth_token: ''
+            };
+          }
+          isModalOpen.value = true;
+        };
+
+        const saveMember = () => {
+          if (!tempMember.value.email || !tempMember.value.name) {
+            alert('Email 與姓名為必填欄位');
+            return;
+          }
+
+          if (isEdit.value) {
+            const idx = members.value.findIndex(m => m.id === tempMember.value.id);
+            members.value[idx] = { ...tempMember.value };
+          } else {
+            members.value.push({ ...tempMember.value });
+          }
+          
+          isModalOpen.value = false;
+          console.log("目前的會員 JSON:", JSON.stringify(members.value));
+          alert("儲存成功！(請手動更新 members.json)");
+        };
+
+        const deleteMember = (id) => {
+          if (confirm('確定要移除此會員帳號嗎？')) {
+            members.value = members.value.filter(m => m.id !== id);
+          }
+        };
+
+        onMounted(fetchMembers);
+
+        return { members, isModalOpen, isEdit, tempMember, openModal, saveMember, deleteMember };
+      }
+    }).mount('#app');
+  </script>
+</body>
+</html>
